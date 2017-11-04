@@ -1989,7 +1989,11 @@ function! s:normalize_link_syntax_v() " {{{
 
   try
     " Save selected text to register "
-    normal! gv""y
+    if sel_save != "exclusive"
+      normal! gv""y
+    else
+      normal! gvh""y
+    endif
 
     " Set substitution
     if s:is_diary_file(expand("%:p"))
